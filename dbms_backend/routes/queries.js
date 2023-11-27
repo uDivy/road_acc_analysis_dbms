@@ -42,24 +42,24 @@ router.get('/drugAlcoholVision', async function(req, res){
    res.send(data);
 });
 router.get('/fatalitiesPerSeason', async function(req, res){
-   let data = await sequelize.query(`with fatalities as (SELECT count(*) as peopleKilled, caseID
-   FROM inglepranil.Person
-   WHERE INJURYSEVERITY = 4
-   GROUP BY caseID),
-   totalPersons as(SELECT count(*) as totalInvolvedPeople, caseID
-   FROM inglepranil.Person
-   GROUP BY caseID),
-   seasoncases as (SELECT caseID,
-   CASE WHEN TO_NUMBER(to_char(crashtime, 'mm')) >= 3 AND TO_NUMBER(to_char(crashtime, 'mm')) <= 5 THEN 'Spring'
-      WHEN TO_NUMBER(to_char(crashtime, 'mm')) >= 6 AND TO_NUMBER(to_char(crashtime, 'mm')) <= 8 THEN 'Summer'
-      WHEN TO_NUMBER(to_char(crashtime, 'mm')) >= 9 AND TO_NUMBER(to_char(crashtime, 'mm')) <= 11 THEN 'Autumn'
-      ELSE 'Winter' END as season
-   FROM inglepranil.Accident)
-   SELECT season, (SUM(peoplekilled)/SUM(totalInvolvedPeople))*100 as fatalityRate FROM seasoncases NATURAL JOIN fatalities
-   NATURAL JOIN totalPersons
-   GROUP BY season;`);
-   res.send(data);
-});
+    let data = await sequelize.query(`with fatalities as (SELECT count(*) as peopleKilled, caseID
+    FROM inglepranil.Person
+    WHERE INJURYSEVERITY = 4
+    GROUP BY caseID),
+    totalPersons as(SELECT count(*) as totalInvolvedPeople, caseID
+    FROM inglepranil.Person
+    GROUP BY caseID),
+    seasoncases as (SELECT caseID,weatherName,
+    CASE WHEN TO_NUMBER(to_char(crashtime, 'mm')) >= 3 AND TO_NUMBER(to_char(crashtime, 'mm')) <= 5 THEN 'Spring'
+       WHEN TO_NUMBER(to_char(crashtime, 'mm')) >= 6 AND TO_NUMBER(to_char(crashtime, 'mm')) <= 8 THEN 'Summer'
+       WHEN TO_NUMBER(to_char(crashtime, 'mm')) >= 9 AND TO_NUMBER(to_char(crashtime, 'mm')) <= 11 THEN 'Autumn'
+       ELSE 'Winter' END as season
+    FROM inglepranil.Accident NATURAL JOIN Weather)
+    SELECT weatherName,season, (SUM(peoplekilled)/SUM(totalInvolvedPeople))*100 as fatalityRate FROM seasoncases NATURAL JOIN fatalities
+    NATURAL JOIN totalPersons
+    GROUP BY season,weatherName;`);
+    res.send(data);
+ });
 router.get('/crashSeverityIndex', async function(req, res){
    let data = await sequelize.query(`with injuriesAndFatalities as (
       SELECT caseID,COUNT(CASE WHEN injurySeverity = 4 THEN 1 END) as fatalities,

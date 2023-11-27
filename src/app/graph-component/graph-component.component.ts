@@ -140,7 +140,9 @@ public scatterChartOptions: ChartOptions = {
       }
       for(let label of this.lineChartData.labels){
         let yData = dataArray.find((a:any)=>a[categoryKey] === category && a[timeString] === label);
+        if(yData)
         dataSet.data.push(yData[yDataString]);
+      else dataSet.data.push(0)
       }
       this.lineChartData.datasets.push(dataSet);
     }
@@ -194,29 +196,31 @@ this.lineChartOptions.scales.y.title.text = 'FATALITYRATE';
       this.lineChartOptions.plugins.title.text = 'Seasonal Fatality Rate Analysis'
       this.lineChartOptions = structuredClone(this.lineChartOptions)
       this.apiService.fatalitiesPerSeason().subscribe((data)=>{
-        console.log(data);
-        let spring = data[0].find((a:any)=>a['SEASON'] ==='Spring');
-        let summer = data[0].find((a:any)=>a['SEASON'] ==='Summer');
-        let autumn = data[0].find((a:any)=>a['SEASON'] ==='Autumn');
-        let winter = data[0].find((a:any)=>a['SEASON'] ==='Winter');
-        this.lineChartData = {
-          labels: [
-            'Spring',
-            'Summer',
-            'Autumn',
-            'Winter'
-          ],
-          datasets: [
-            {
-              data: [ spring['FATALITYRATE'], summer['FATALITYRATE'], autumn['FATALITYRATE'],winter['FATALITYRATE'] ],
-              label: 'Seasons',
-              fill: true,
-              tension: 0.5,
-            }
-          ]
-        }
-        this.unChangedValue = structuredClone(this.lineChartData);
-        this.filterCategories(filter);
+        // console.log(data);
+        // let spring = data[0].find((a:any)=>a['SEASON'] ==='Spring');
+        // let summer = data[0].find((a:any)=>a['SEASON'] ==='Summer');
+        // let autumn = data[0].find((a:any)=>a['SEASON'] ==='Autumn');
+        // let winter = data[0].find((a:any)=>a['SEASON'] ==='Winter');
+        // this.lineChartData = {
+        //   labels: [
+        //     'Spring',
+        //     'Summer',
+        //     'Autumn',
+        //     'Winter'
+        //   ],
+        //   datasets: [
+        //     {
+        //       data: [ spring['FATALITYRATE'], summer['FATALITYRATE'], autumn['FATALITYRATE'],winter['FATALITYRATE'] ],
+        //       label: 'Seasons',
+        //       fill: true,
+        //       tension: 0.5,
+        //     }
+        //   ]
+        // }
+        // this.unChangedValue = structuredClone(this.lineChartData);
+        this.unChangedValue = this.changeToGraphData(data[0],'WEATHERNAME','SEASON','FATALITYRATE');
+        this.lineChartData = structuredClone(this.unChangedValue)
+        console.log(this.unChangedValue)
       })
     }else if(queryName === 'drugAlcoholVision'){
       this.chartType = 'bar';
