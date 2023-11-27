@@ -1,0 +1,32 @@
+
+    <div class="head">
+        Road Accident Analysis: In-Depth Insights
+    </div>
+    <div class="body">
+        <div class="form">
+            <form class="same" (submit)="login()" id="login-form">
+                <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="First and Lastname" required>
+                <br>
+                <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Password">
+                <br>
+                <button class="btn" type="submit">Login</button>
+              </form>
+              <form class="same" (submit)="signup()">
+                <button class="btn" type="submit">Submit</button>
+              </form>
+        </div>
+        <div class="attach">
+            <form  action="/signup">
+                <button type="submit">Data Driven By (NHTSA)</button>
+            </form>
+        </div>
+        <!-- Add this div to display the error message -->
+    <div class="error-popup" *ngIf="loginError">
+        <div class="error-message">
+          {{ loginErrorMessage }}
+        </div>
+      </div>
+    </div>
+
+    
+       

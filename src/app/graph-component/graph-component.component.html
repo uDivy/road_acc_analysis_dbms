@@ -1,0 +1,17 @@
+
+<div style="display: block;">
+    <canvas baseChart width="800" height="400"
+      *ngIf="chartType === 'bar'"
+      [type]="'bar'"
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend">
+    </canvas>
+    <canvas baseChart width="800" height="400"
+    *ngIf="chartType === 'scatter'"
+        [datasets]="scatterChartDatasets"
+        [options]="scatterChartOptions"
+        [type]="'scatter'">
+</canvas>
+  </div>
+  

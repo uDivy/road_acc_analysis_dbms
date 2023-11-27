@@ -1,0 +1,149 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #007BFF;
+    color: white;
+    height: 10px;
+    z-index: 1000;
+  }
+  
+  .left-section,
+  .right-section {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  button {
+    background-color: #0069D9;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }  
+
+  .side-nav {
+    width: 250px;
+    height: 100%;
+    /* position: absolute;
+    top: 42px; */
+    left: 0;
+    background-color: #333;
+    overflow: hidden;
+    padding-top: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* Allow the dropdown to span the entire width */
+  top: 0;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column; /* Ensure list items stack vertically */
+  background-color: #f9f9f9;
+  width: 100%; /* Match the width of the dropdown */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  position: absolute;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+
+.side-nav-view {
+  width: 250px;
+    height: 100%;
+    /* position: absolute;
+    top: 42px; */
+    left: 0;
+    background-color: #333;
+    overflow: hidden;
+    padding-top: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.table-count-button {
+  position: absolute;
+  bottom: 10px; /* Adjust the distance from the bottom */
+  right: 10px; /* Adjust the distance from the right */
+  background-color: #0069D9;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+}
+
+.table-count-button:hover {
+  background-color: #0056b3;
+}
+
+.side-nav-button-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav-button {
+  background-color: #0069D9;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Buttons span the full width of the container */
+  text-align: center; /* Center button text horizontally */
+  display: flex; /* Use flex to center text vertically */
+  justify-content: center; /* Center text horizontally within the button */
+  align-items: center; /* Center text vertically within the button */
+}
+
+.side-nav-button:hover {
+  background-color: #0056b3;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 50px);
+  flex-direction: row;
+}
+
+.content-container {
+  width: calc(100% - 250px);
+  height: 100%;
+  position: relative;
+  margin-left: auto;
+  /* top: 42px; */
+  /* left: 250px; */
+  background-color: #333;
+  overflow: hidden;
+  padding-top: 20px;
+  box-sizing: border-box;/* Include padding and border in the element's total width and height */
+  z-index: 500;
+}

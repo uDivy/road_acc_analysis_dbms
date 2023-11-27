@@ -1,0 +1,89 @@
+<div class="header-container">
+    <div class="left-section">
+      <button class="filter-button" (click)="toggleNav('filter')">Filters</button>
+      <!-- <button class="view-button" (click)="toggleNav('view')" [disabled]="isButtonDisabled">View</button> -->
+    </div>
+    <div class="title">Road Accident Analysis - In-Depth Insights</div>
+    <div class="right-section">
+      <button class="du-button" (click)="redirectToLoginPage()">{{ loggedInUsername }}</button>
+    </div>
+    
+    <button class="table-count-button" (click)="getTableCount()">{{ tableCountResponse }}</button>
+
+  </div>  
+
+<div class="main-container">
+
+<div *ngIf="showNav" class="side-nav">
+    <!-- <input type="text" [(ngModel)]="searchText" placeholder="Search"> -->
+    <!-- <div class="nav-item" *ngFor="let item of navItems | filter:searchText">{{item}}</div> -->
+    <div class="dropdown">
+      <button (click)="toggleDropdown('state')" class="dropdown">Analysis by State</button>
+      <div *ngIf="showDropdownState" class="dropdown-content">
+        <input type="text" [(ngModel)]="searchText" placeholder="Search.." (keyup)="filterStates()">
+        <a *ngFor="let state of filteredStates" (click)="toggleState(state)">
+          {{ state }}
+          <span *ngIf="selectedStates.includes(state)"> (Selected)</span>
+        </a>
+      </div>
+    </div>    
+  <!-- New code for Age Group filter -->
+<div class="dropdown">
+  <button (click)="toggleDropdown('ageGroup')" class="dropdown">Analysis by Age Group</button>
+  <div *ngIf="showDropdownAgeGroup" class="dropdown-content">
+    <input type="text" [(ngModel)]="ageGroupSearchText" placeholder="Search.." (keyup)="filterAgeGroups()">
+    <a *ngFor="let ageGroup of filteredAgeGroups" (click)="filterAgeGroupGraph(ageGroup)">{{ ageGroup }}</a>
+  </div>
+</div>
+<!-- New code for Gender filter -->
+<div class="dropdown">
+  <button (click)="toggleDropdown('gender')" class="dropdown">Analysis by Gender</button>
+  <div *ngIf="showDropdownGender" class="dropdown-content">
+    <input type="text" [(ngModel)]="genderSearchText" placeholder="Search.." (keyup)="filterGenders()">
+    <a *ngFor="let gender of filteredGenders" (click)="filterGenderGraph(gender)">{{ gender }}</a>
+  </div>
+</div>
+
+<!-- New code for Seasons filter -->
+<div class="dropdown">
+  <button (click)="toggleDropdown('seasons')" class="dropdown">Analysis by Seasons</button>
+  <!-- <div *ngIf="showDropdownSeasons" class="dropdown-content">
+    <input type="text" [(ngModel)]="seasonsSearchText" placeholder="Search.." (keyup)="filterSeasons()">
+    <a *ngFor="let season of filteredSeasons" (click)="filterGraphSeasons(season)">{{ season }}</a>
+  </div> -->
+</div>
+
+<!-- New code for Factors filter -->
+<div class="dropdown">
+  <button (click)="toggleDropdown('factors')" class="dropdown">Analysis by Factors</button>
+  <div *ngIf="showDropdownFactors" class="dropdown-content">
+    <input type="text" [(ngModel)]="factorsSearchText" placeholder="Search.." (keyup)="filterFactors()">
+    <a *ngFor="let factor of filteredFactors" (click)="filterFactorGraph(factor)">{{ factor }}</a>
+  </div>
+</div>
+
+<!-- New code for Response Time filter -->
+<div class="dropdown">
+  <button (click)="toggleDropdown('responseTime')" class="dropdown">Analysis by Response Time</button>
+  <!-- <div *ngIf="showDropdownResponseTime" class="dropdown-content">
+    <input type="text" [(ngModel)]="responseTimeSearchText" placeholder="Search.." (keyup)="filterResponseTime()">
+    <a *ngFor="let responseTime of filteredResponseTime">{{ responseTime }}</a>
+  </div> -->
+</div>
+</div>
+
+
+<!-- <div *ngIf="showNavView" class="side-nav-view">
+  <ul class="side-nav-button-list">
+    <li *ngFor="let buttonName of sideNavButtons">
+      <button class="side-nav-button">{{ buttonName }}</button>
+    </li>
+  </ul>
+</div> -->
+
+  <div class="content-container">
+      <div>
+          <app-graph-component [queryName]="queryName" [filter]="filter"></app-graph-component>
+      </div>
+  </div>
+</div>
